@@ -7,13 +7,16 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 
 import AppRoot from './components/AppRoot.js';
+import Home from './components/Home.js';
 
+import campaigns from './reducers/campaigns';
 
 var initialContent = {
-
+    campaigns: {idList: [], records: {}}
 };
 
 const reducers = combineReducers({
+    campaigns
 });
 
 const store = createStore(
@@ -27,15 +30,6 @@ ReactDOM.render(
         <Router history={hashHistory}>
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
-                <Route path="login" component={Login}/>
-                <Route path="search" component={Search}/>
-                <Route path="givingHistory" component={GivingHistory}/>
-                <Route path="basket" component={Basket}/>
-                <Route path="donate/:ein" component={Donate}/>
-                <Route path="checkout" component={Checkout}/>
-                <Route path="confirmation/:orderId" component={Confirmation}/>
-                <Route path="updateDonation/:donationId" component={UpdateDonation}/>
-                <Route path="giftMessage/:donationId" component={GiftMessage}/>
             </Route>
         </Router>
     </Provider>,

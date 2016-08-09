@@ -1,6 +1,8 @@
 export const SET_DONOR = 'SET_DONOR';
 export const CLEAR_DONOR = 'CLEAR_DONOR';
 
+export const SET_CAMPAIGNS = 'SET_CAMPAIGNS';
+
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
 
