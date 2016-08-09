@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import NavLink from './NavLink'
-import { login, logout } from '../actions/donor';
 
 /**
  * Appears at top of screen
@@ -45,6 +44,12 @@ class Header extends React.Component {
                         </div>
                     </div>
                 </div>
+                <NavLink to="/" style={{marginLeft: '10px'}}>
+                    Home
+                </NavLink>
+                <NavLink to="/campaignList" style={{marginLeft: '10px'}}>
+                    CampaignList
+                </NavLink>
             </div>
         )
     }
@@ -57,6 +62,6 @@ const mapStateToProps = (state) => {
 };
 export default connect(
     mapStateToProps,
-    {logout}
+    {}
 )(Header);
 

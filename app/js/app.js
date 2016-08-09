@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
+import CampaignList from './components/CampaignList.js';
 
 import campaigns from './reducers/campaigns';
 
@@ -30,6 +31,7 @@ ReactDOM.render(
         <Router history={hashHistory}>
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
+                <Route path="campaignList" component={CampaignList}/>
             </Route>
         </Router>
     </Provider>,

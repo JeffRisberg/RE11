@@ -58,5 +58,14 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/js/actions/basketItems.js" />
+    <file url="file://$PROJECT_DIR$/app/js/actions/categories.js" />
+    <file url="file://$PROJECT_DIR$/app/js/actions/completedBasketItems.js" />
+    <file url="file://$PROJECT_DIR$/app/js/actions/currentCharities.js" />
+    <file url="file://$PROJECT_DIR$/app/js/actions/donor.js" />
+    <file url="file://$PROJECT_DIR$/app/js/actions/givingHistoryItems.js" />
+    <file url="file://$PROJECT_DIR$/app/js/actions/topCharities.js" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
