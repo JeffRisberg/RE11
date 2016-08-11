@@ -53,6 +53,9 @@ class Header extends React.Component {
                 <NavLink to="/resizeExample" style={{marginLeft: '10px'}}>
                     ResizeExample
                 </NavLink>
+                <NavLink to="/griddleExample" style={{marginLeft: '10px'}}>
+                    GriddleExample
+                </NavLink>
             </div>
         )
     }
