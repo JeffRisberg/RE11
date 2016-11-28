@@ -18,45 +18,54 @@ class GriddleExample extends React.Component {
                 "name": "Mayer Leonard",
                 "city": "Kapowsin",
                 "state": "Hawaii",
-                "country": "United Kingdom",
+                "country": "United States",
                 "company": "Ovolo",
-                "favoriteNumber": 7
+                "favoriteNumber": 4
             },
             {
                 "id": 1,
                 "name": "Big James",
                 "city": "Kapowsin",
                 "state": "Hawaii",
-                "country": "United Kingdom",
+                "country": "United States",
                 "company": "Ovolo",
-                "favoriteNumber": 7
+                "favoriteNumber": 9
             },
             {
                 "id": 2,
                 "name": "Tom Hill",
                 "city": "Kapowsin",
                 "state": "Hawaii",
-                "country": "United Kingdom",
+                "country": "United States",
                 "company": "Ovolo",
-                "favoriteNumber": 7
+                "favoriteNumber": 13
             },
             {
                 "id": 3,
                 "name": "Aplya Blocks",
                 "city": "Kapowsin",
                 "state": "Hawaii",
-                "country": "United Kingdom",
+                "country": "United States",
                 "company": "Ovolo",
-                "favoriteNumber": 7
+                "favoriteNumber": 27
             },
             {
                 "id": 4,
                 "name": "Frodo Baggins",
                 "city": "Kapowsin",
                 "state": "Hawaii",
-                "country": "United Kingdom",
+                "country": "United States",
                 "company": "Ovolo",
-                "favoriteNumber": 7
+                "favoriteNumber": 29
+            },
+            {
+                "id": 5,
+                "name": "Gandalf the Gray",
+                "city": "Kapowsin",
+                "state": "Hawaii",
+                "country": "United States",
+                "company": "Ovolo",
+                "favoriteNumber": 31
             }
         ];
 
