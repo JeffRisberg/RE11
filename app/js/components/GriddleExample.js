@@ -1,6 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router'
-import Griddle from 'griddle-react'
+import React from "react";
+import {Link} from "react-router";
+import Griddle, {plugins, RowDefinition, ColumnDefinition} from "griddle-react";
+import {connect} from "react-redux";
+import {queryCampaigns} from "../actions/campaigns";
 
 /**
  * GriddleExample
@@ -10,71 +12,53 @@ import Griddle from 'griddle-react'
  */
 class GriddleExample extends React.Component {
 
-    render() {
-        var fakeData =  [
-            {
-                "id": 0,
-                "name": "Mayer Leonard",
-                "city": "Kapowsin",
-                "state": "Hawaii",
-                "country": "United States",
-                "company": "Ovolo",
-                "favoriteNumber": 4
-            },
-            {
-                "id": 1,
-                "name": "Big James",
-                "city": "Kapowsin",
-                "state": "Hawaii",
-                "country": "United States",
-                "company": "Ovolo",
-                "favoriteNumber": 9
-            },
-            {
-                "id": 2,
-                "name": "Tom Hill",
-                "city": "Kapowsin",
-                "state": "Hawaii",
-                "country": "United States",
-                "company": "Ovolo",
-                "favoriteNumber": 13
-            },
-            {
-                "id": 3,
-                "name": "Aplya Blocks",
-                "city": "Kapowsin",
-                "state": "Hawaii",
-                "country": "United States",
-                "company": "Ovolo",
-                "favoriteNumber": 27
-            },
-            {
-                "id": 4,
-                "name": "Frodo Baggins",
-                "city": "Kapowsin",
-                "state": "Hawaii",
-                "country": "United States",
-                "company": "Ovolo",
-                "favoriteNumber": 29
-            },
-            {
-                "id": 5,
-                "name": "Gandalf the Gray",
-                "city": "Kapowsin",
-                "state": "Hawaii",
-                "country": "United States",
-                "company": "Ovolo",
-                "favoriteNumber": 31
-            }
-        ];
+    componentDidMount() {
+        this.props.queryCampaigns();
+    }
 
+    render() {
+        const campaignItems = this.props.campaigns;
+
+        var campaigns = campaignItems.idList.map(function (itemId, index) {
+            const campaign = campaignItems.records[itemId];
+
+            return campaign;
+        });
+
+        console.log(plugins);
         return (
             <p>
-                <Griddle results={fakeData} tableClassName="table" showFilter={true}
-                         showSettings={true} columns={["name", "city", "state", "country"]}/>
+                <Griddle data={campaigns}
+                         styleConfig={{classNames: {Table: 'table'}}}
+                         showFilter={true}
+                         showSettings={true}
+                         plugins={[plugins.LocalPlugin]}
+                >
+                    <RowDefinition>
+                        <ColumnDefinition order="0" id="name" title="Name"/>
+                        <ColumnDefinition order="1" id="status" title="Status"/>
+                        <ColumnDefinition order="2" id="startDate" title="Start Date"/>
+                        <ColumnDefinition order="3" id="impressions" title="Impressions"/>
+                        <ColumnDefinition order="4" id="clicks" title="Clicks"/>
+                        <ColumnDefinition order="5" id="ctr" title="CTR"/>
+                        <ColumnDefinition order="6" id="cost" title="Cost"/>
+                        <ColumnDefinition order="7" id="cpc" title="CPC"/>
+                        <ColumnDefinition order="8" id="cpm" title="CPM"/>
+                        <ColumnDefinition order="9" id="margin" title="Margin"/>
+                    </RowDefinition>
+                </Griddle>
             </p>
         )
     }
 }
 
-export default GriddleExample;
+const mapStateToProps = (state) => {
+    return {
+        campaigns: state.campaigns
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    {queryCampaigns}
+)(GriddleExample);
