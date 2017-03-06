@@ -1,20 +1,9 @@
-/**
- * This file provided by Facebook is for non-commercial testing and evaluation
- * purposes only. Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 "use strict";
 
-var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
-var FixedDataTable = require('fixed-data-table');
-var React = require('react');
+import React from 'react'
+import FixedDataTable from 'fixed-data-table'
+
+import FakeObjectDataListStore from '../helpers/FakeObjectDataListStore'
 
 const {Table, Column, Cell} = FixedDataTable;
 
@@ -24,23 +13,20 @@ const TextCell = ({rowIndex, data, columnKey, ...props}) => (
     </Cell>
 );
 
-class ResizeExample extends React.Component {
+class FixedDataTableExample extends React.Component {
     constructor(props) {
         super(props);
-
-        console.log(props);
 
         this.state = {
             dataList: new FakeObjectDataListStore(1000000),
             columnWidths: {
                 firstName: 240,
                 lastName: 150,
-                sentence: 140,
-                companyName: 60
+                street: 180,
+                state: 120,
+                zipCode: 120
             }
         };
-
-        console.log(this.state.dataList);
 
         this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     }
@@ -56,7 +42,7 @@ class ResizeExample extends React.Component {
 
     render() {
         var {dataList, columnWidths} = this.state;
-        console.log("render");
+
         return (
             <Table
                 rowHeight={28}
@@ -77,7 +63,7 @@ class ResizeExample extends React.Component {
                     />
                 <Column
                     columnKey="lastName"
-                    header={<Cell>Last Name (min/max constrained)</Cell>}
+                    header={<Cell>Last Name (constrained)</Cell>}
                     cell={<TextCell data={dataList} />}
                     width={columnWidths.lastName}
                     isResizable={true}
@@ -85,22 +71,29 @@ class ResizeExample extends React.Component {
                     maxWidth={200}
                     />
                 <Column
-                    columnKey="companyName"
-                    header={<Cell>Company</Cell>}
+                    columnKey="street"
+                    header={<Cell>Street</Cell>}
                     cell={<TextCell data={dataList} />}
-                    width={columnWidths.companyName}
+                    width={columnWidths.street}
                     isResizable={true}
                     />
                 <Column
-                    columnKey="sentence"
-                    header={<Cell>Sentence</Cell>}
+                    columnKey="state"
+                    header={<Cell>State</Cell>}
                     cell={<TextCell data={dataList} />}
-                    width={columnWidths.sentence}
+                    width={columnWidths.state}
                     isResizable={true}
                     />
+                <Column
+                    columnKey="zipCode"
+                    header={<Cell>Zip Code</Cell>}
+                    cell={<TextCell data={dataList} />}
+                    width={columnWidths.zipCode}
+                    isResizable={true}
+                />
             </Table>
         );
     }
 }
 
-export default ResizeExample;
+export default FixedDataTableExample;

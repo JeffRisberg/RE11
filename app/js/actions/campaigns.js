@@ -1,18 +1,16 @@
-import fetch from 'isomorphic-fetch';
+import request from "axios";
 
-import { SET_CAMPAIGNS } from '../constants/ActionTypes'
+import {SET_CAMPAIGNS} from "../constants/ActionTypes";
 
 export const queryCampaigns = () => {
     return function (dispatch, getState) {
 
-        return fetch('/ws/campaigns', {})
-            .then(response => response.json())
-            .then((json) => {
-                const campaigns = json.data;
-
+        return request.get('/ws/campaigns')
+            .then(response => response.data)
+            .then(response => {
                 dispatch({
                     type: SET_CAMPAIGNS,
-                    campaigns: json.data
+                    campaigns: response.data
                 });
             });
     }

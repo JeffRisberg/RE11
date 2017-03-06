@@ -14,26 +14,6 @@ import NavLink from './NavLink'
 class Header extends React.Component {
 
     render() {
-        var location = this.props.currentLocation.substring(1);
-        var breadCrumb = null;
-
-        if (location.startsWith("search")) breadCrumb = "Find a Charity";
-        if (location.startsWith("basket")) breadCrumb = "Giving Basket";
-        if (location.startsWith("donate")) breadCrumb = "Make a Donation";
-        if (location.startsWith("checkout")) breadCrumb = "Checkout";
-        if (location.startsWith("confirmation")) breadCrumb = "Confirmation";
-        if (location.startsWith("givingHistory")) breadCrumb = "Giving History";
-
-        var headerText = "Not logged in";
-        let loginLogout = <Link to="/login" style={{marginLeft: '10px'}}>Login</Link>;
-        if (this.props.donor != null) {
-            var firstName = this.props.donor.firstName;
-            var points = this.props.donor.points;
-
-            headerText = firstName + " " + points + " points";
-            loginLogout = <a onClick={this.props.logout} style={{marginLeft: '10px'}}>Logout</a>;
-        }
-
         return (
             <div>
                 <div className="header row white">

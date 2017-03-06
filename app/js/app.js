@@ -9,7 +9,7 @@ import thunkMiddleware from 'redux-thunk'
 import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
 import CampaignList from './components/CampaignList.js';
-import ResizeExample from './components/ResizeExample.js';
+import FixedDataTableExample from './components/FixedDataTableExample.js';
 import GriddleExample from './components/GriddleExample.js';
 
 import campaigns from './reducers/campaigns';
@@ -34,7 +34,7 @@ ReactDOM.render(
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
                 <Route path="campaignList" component={CampaignList}/>
-                <Route path="resizeExample" component={ResizeExample}/>
+                <Route path="resizeExample" component={FixedDataTableExample}/>
                 <Route path="griddleExample" component={GriddleExample}/>
             </Route>
         </Router>
