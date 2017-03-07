@@ -1,11 +1,16 @@
 "use strict";
 
-import React from 'react'
-import FixedDataTable from 'fixed-data-table'
-
-import FakeObjectDataListStore from '../helpers/FakeObjectDataListStore'
+import React from "react";
+import FixedDataTable from "fixed-data-table";
+import {connect} from "react-redux";
+import {queryKeywords} from "../actions/keywords";
 
 const {Table, Column, Cell} = FixedDataTable;
+
+var columnWidths = {
+    id: 240,
+    text: 120
+}
 
 const TextCell = ({rowIndex, data, columnKey, ...props}) => (
     <Cell {...props}>
@@ -17,83 +22,64 @@ class FixedDataTableExample extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            dataList: new FakeObjectDataListStore(1000000),
-            columnWidths: {
-                firstName: 240,
-                lastName: 150,
-                street: 180,
-                state: 120,
-                zipCode: 120
-            }
-        };
-
         this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     }
 
+    componentDidMount() {
+        this.props.queryKeywords();
+    }
+
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths}) => ({
-            columnWidths: {
-                ...columnWidths,
-                [columnKey]: newColumnWidth,
-            }
-        }));
+        //this.setState(({columnWidths}) => ({
+        //    columnWidths: {
+        //        ...columnWidths,
+        //        [columnKey]: newColumnWidth,
+        //    }
+        //}));
     }
 
     render() {
-        var {dataList, columnWidths} = this.state;
+        var keywordStore = this.props.keywords;
 
         return (
             <Table
                 rowHeight={28}
                 headerHeight={50}
-                rowsCount={dataList.getSize()}
+                rowsCount={keywordStore.getSize()}
                 onColumnResizeEndCallback={this._onColumnResizeEndCallback}
                 isColumnResizing={false}
                 width={1000}
                 height={200}
                 {...this.props}>
                 <Column
-                    columnKey="firstName"
-                    header={<Cell>First Name</Cell>}
-                    cell={<TextCell data={dataList} />}
+                    columnKey="id"
+                    header={<Cell>Id</Cell>}
+                    cell={<TextCell data={keywordStore}/>}
                     fixed={true}
-                    width={columnWidths.firstName}
+                    width={columnWidths.id}
                     isResizable={true}
-                    />
+                />
                 <Column
-                    columnKey="lastName"
-                    header={<Cell>Last Name (constrained)</Cell>}
-                    cell={<TextCell data={dataList} />}
-                    width={columnWidths.lastName}
+                    columnKey="text"
+                    header={<Cell>Text (constrained)</Cell>}
+                    cell={<TextCell data={keywordStore}/>}
+                    width={columnWidths.text}
                     isResizable={true}
                     minWidth={70}
                     maxWidth={200}
-                    />
-                <Column
-                    columnKey="street"
-                    header={<Cell>Street</Cell>}
-                    cell={<TextCell data={dataList} />}
-                    width={columnWidths.street}
-                    isResizable={true}
-                    />
-                <Column
-                    columnKey="state"
-                    header={<Cell>State</Cell>}
-                    cell={<TextCell data={dataList} />}
-                    width={columnWidths.state}
-                    isResizable={true}
-                    />
-                <Column
-                    columnKey="zipCode"
-                    header={<Cell>Zip Code</Cell>}
-                    cell={<TextCell data={dataList} />}
-                    width={columnWidths.zipCode}
-                    isResizable={true}
                 />
             </Table>
         );
     }
 }
 
-export default FixedDataTableExample;
+const mapStateToProps = (state) => {
+    return {
+        keywords: state.keywords
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    {queryKeywords}
+)(FixedDataTableExample);

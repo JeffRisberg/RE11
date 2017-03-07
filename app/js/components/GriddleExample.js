@@ -25,9 +25,8 @@ class GriddleExample extends React.Component {
             return campaign;
         });
 
-        console.log(plugins);
         return (
-            <p>
+            <div>
                 <Griddle data={campaigns}
                          styleConfig={{classNames: {Table: 'table'}}}
                          showFilter={true}
@@ -47,7 +46,7 @@ class GriddleExample extends React.Component {
                         <ColumnDefinition order="9" id="margin" title="Margin"/>
                     </RowDefinition>
                 </Griddle>
-            </p>
+            </div>
         )
     }
 }

@@ -13,13 +13,17 @@ import FixedDataTableExample from './components/FixedDataTableExample.js';
 import GriddleExample from './components/GriddleExample.js';
 
 import campaigns from './reducers/campaigns';
+import keywords from './reducers/keywords';
+import Store from "./helpers/Store";
 
 var initialContent = {
-    campaigns: {idList: [], records: {}}
+    campaigns: {idList: [], records: {}},
+    keywords: new Store([])
 };
 
 const reducers = combineReducers({
-    campaigns
+    campaigns,
+    keywords
 });
 
 const store = createStore(
