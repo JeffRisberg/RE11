@@ -8,8 +8,10 @@ const campaigns = (state = [], action = {}) => {
             const records = {};
 
             action.campaigns.forEach(record => {
-                records[record.id] = record;
-                idList.push(record.id);
+                if (idList.length < 10) {
+                    records[record.id] = record;
+                    idList.push(record.id);
+                }
             });
 
             return {idList, records};

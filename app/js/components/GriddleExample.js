@@ -11,12 +11,22 @@ import {queryCampaigns} from "../actions/campaigns";
  * @since August 2016
  */
 class GriddleExample extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            currentPage: 1,
+            pageSize: 5,
+            recordCount: 100
+        };
+    }
 
     componentDidMount() {
         this.props.queryCampaigns();
     }
 
     render() {
+        const {currentPage, pageSize, recordCount} = this.state;
         const campaignItems = this.props.campaigns;
 
         var campaigns = campaignItems.idList.map(function (itemId, index) {
@@ -25,13 +35,54 @@ class GriddleExample extends React.Component {
             return campaign;
         });
 
+        _onNext = () => {
+            const {currentPage, pageSize} = this.state;
+            console.log("next to " + currentPage);
+
+            //fakeLoadDataFromAPI(currentPage + 1, pageSize, this.updateTableState);
+            this.updateTableState();
+        }
+
+        _onPrevious = () => {
+            const {currentPage, pageSize} = this.state;
+            console.log("prev to " + currentPage);
+
+            //fakeLoadDataFromAPI(currentPage - 1, pageSize, this.updateTableState);
+            this.updateTableState();
+        }
+
+        _onGetPage = (pageNumber) => {
+            const {pageSize} = this.state;
+            console.log("go to " + currentPage);
+
+            //fakeLoadDataFromAPI(pageNumber, pageSize, this.updateTableState);
+            this.updateTableState();
+        }
+
+        updateTableState = (currentPage) => {
+            this.setState({currentPage});
+        }
+
         return (
             <div>
                 <Griddle data={campaigns}
                          styleConfig={{classNames: {Table: 'table'}}}
                          showFilter={true}
                          showSettings={true}
-                         plugins={[plugins.LocalPlugin]}
+                         pageProperties={{
+                             currentPage: currentPage,
+                             pageSize: pageSize,
+                             recordCount: recordCount,
+                         }}
+                         events={{
+                             onNext: this._onNext,
+                             onPrevious: this._onPrevious,
+                             onGetPage: this._onGetPage,
+                         }}
+                         components={{
+                             Filter: () => <span />,
+                             SettingsToggle: () => <span />
+                         }}
                 >
                     <RowDefinition>
                         <ColumnDefinition order="0" id="name" title="Name"/>
