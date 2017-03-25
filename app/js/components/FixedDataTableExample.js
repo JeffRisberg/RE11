@@ -1,5 +1,3 @@
-"use strict";
-
 import React from "react";
 import FixedDataTable from "fixed-data-table";
 import {connect} from "react-redux";
@@ -7,6 +5,12 @@ import {queryKeywords} from "../actions/keywords";
 
 const {Table, Column, Cell} = FixedDataTable;
 
+/**
+ * FixedDataTableExample - this is displaying keyword information
+ *
+ * @author Jeff Risberg
+ * @since August 2016
+ */
 var columnWidths = {
     id: 240,
     text: 120

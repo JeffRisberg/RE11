@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {queryCampaigns} from "../actions/campaigns";
 
 /**
- * GriddleExample
+ * GriddleExample - this is displaying campaign information
  *
  * @author Jeff Risberg
  * @since August 2016
