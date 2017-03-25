@@ -16,10 +16,10 @@ import campaigns from './reducers/campaigns';
 import keywords from './reducers/keywords';
 import Store from "./helpers/Store";
 
-var initialContent = {
-    campaigns: {idList: [], records: {}},
-    keywords: new Store([])
-};
+//var initialContent = {
+//    campaigns: {idList: [], records: {}},
+//    keywords: new Store([])
+//};
 
 const reducers = combineReducers({
     campaigns,
@@ -28,7 +28,7 @@ const reducers = combineReducers({
 
 const store = createStore(
     reducers,
-    initialContent,
+    {},
     applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware)
 );
 

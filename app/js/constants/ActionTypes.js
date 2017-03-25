@@ -1,3 +1,0 @@
-
-export const SET_CAMPAIGNS = 'SET_CAMPAIGNS';
-export const SET_KEYWORDS = 'SET_KEYWORDS';

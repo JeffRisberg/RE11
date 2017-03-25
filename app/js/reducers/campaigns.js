@@ -1,24 +1,18 @@
-import { SET_CAMPAIGNS } from '../constants/ActionTypes'
+import {handleActions} from "redux-actions";
+import {types} from "../types";
 
-const campaigns = (state = [], action = {}) => {
-    switch (action.type) {
-        case SET_CAMPAIGNS: // clear prior campaigns
-        {
-            const idList = [];
-            const records = {};
+export default handleActions({
+    [types.SET_CAMPAIGNS]: (state, action) => {
+        const idList = [];
+        const records = {};
 
-            action.campaigns.forEach(record => {
-                if (idList.length < 10) {
-                    records[record.id] = record;
-                    idList.push(record.id);
-                }
-            });
+        action.campaigns.forEach(record => {
+            if (idList.length < 10) {
+                records[record.id] = record;
+                idList.push(record.id);
+            }
+        });
 
-            return {idList, records};
-        }
-        default:
-            return state;
+        return {idList, records};
     }
-};
-
-export default campaigns;
+}, {idList: [], records: {}});

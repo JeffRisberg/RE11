@@ -1,6 +1,6 @@
 import request from "axios";
 
-import {SET_KEYWORDS} from "../constants/ActionTypes";
+import {types} from "../types";
 
 export const queryKeywords = () => {
     return function (dispatch, getState) {
@@ -9,7 +9,7 @@ export const queryKeywords = () => {
             .then(response => response.data)
             .then(response => {
                 dispatch({
-                    type: SET_KEYWORDS,
+                    type: types.SET_KEYWORDS,
                     keywords: response.data
                 });
             });

@@ -1,6 +1,6 @@
 import request from "axios";
 
-import {SET_CAMPAIGNS} from "../constants/ActionTypes";
+import {types} from "../types";
 
 export const queryCampaigns = () => {
     return function (dispatch, getState) {
@@ -9,7 +9,7 @@ export const queryCampaigns = () => {
             .then(response => response.data)
             .then(response => {
                 dispatch({
-                    type: SET_CAMPAIGNS,
+                    type: types.SET_CAMPAIGNS,
                     campaigns: response.data
                 });
             });

@@ -1,15 +1,10 @@
-import {SET_KEYWORDS} from "../constants/ActionTypes";
+import {handleActions} from "redux-actions";
+import {types} from "../types";
+
 import Store from "../helpers/Store";
 
-const keywords = (state = [], action = {}) => {
-    switch (action.type) {
-        case SET_KEYWORDS: // clear prior keywords
-        {
-            return new Store(action.keywords);
-        }
-        default:
-            return state;
+export default handleActions({
+    [types.SET_KEYWORDS]: (state, action) => {
+        return new Store(action.keywords);
     }
-};
-
-export default keywords;
+}, new Store([]));
