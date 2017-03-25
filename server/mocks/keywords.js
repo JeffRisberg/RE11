@@ -1,8 +1,15 @@
 const express = require('express');
 
+const numeric = require("../util/numeric");
+
 const keywordsRouter = express.Router();
 
 const bodyParser = require('body-parser');
+
+function isNormalInteger(str) {
+    var n = Math.floor(Number(str));
+    return String(n) === str && n >= 0;
+}
 
 module.exports = (app) => {
     app.use(bodyParser.urlencoded({
@@ -16,16 +23,17 @@ module.exports = (app) => {
     keywordsRouter.get('/', function (req, res) {
         const skip = req.query.skip;
         const limit = req.query.limit;
-        const sort = req.query.sort ? req.query.sort : { '_id' : 1};
-        let query = keywordDB.find(req.query).sort(sort);
-
-        if (skip) query = query.skip(skip);
-        if (limit) query = query.limit(limit);
+        const sort = req.query.sort ? {[req.query.sort] : 1} : {'id' : 1};
 
         delete req.query['_'];
         delete req.query['skip'];
         delete req.query['limit'];
         delete req.query['sort'];
+
+        let query = keywordDB.find(req.query);
+
+        if (numeric.isNormalInteger(skip)) query = query.skip(parseInt(skip));
+        if (numeric.isNormalInteger(limit)) query = query.limit(parseInt(limit));
 
         query.exec(sort).exec(function (error, keywords) {
             res.send({

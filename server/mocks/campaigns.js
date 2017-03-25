@@ -1,5 +1,7 @@
 const express = require('express');
 
+const numeric = require("../util/numeric");
+
 const campaignsRouter = express.Router();
 
 const bodyParser = require('body-parser');
@@ -16,18 +18,19 @@ module.exports = (app) => {
     campaignsRouter.get('/', function (req, res) {
         const skip = req.query.skip;
         const limit = req.query.limit;
-        const sort = req.query.sort ? req.query.sort : { '_id' : 1};
-        let query = campaignDB.find(req.query).sort(sort);
-
-        if (skip) query = query.skip(skip);
-        if (limit) query = query.limit(limit);
+        const sort = req.query.sort ? {[req.query.sort] : 1} : {'id' : 1};
 
         delete req.query['_'];
         delete req.query['skip'];
         delete req.query['limit'];
         delete req.query['sort'];
 
-        query.exec(function (error, campaigns) {
+        let query = campaignDB.find(req.query);
+
+        if (numeric.isNormalInteger(skip)) query = query.skip(parseInt(skip));
+        if (numeric.isNormalInteger(limit)) query = query.limit(parseInt(limit));
+
+        query.sort(sort).exec(function (error, campaigns) {
             res.send({
                 'status': "ok",
                 'data': campaigns
