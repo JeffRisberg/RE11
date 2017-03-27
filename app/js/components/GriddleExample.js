@@ -25,6 +25,15 @@ class GriddleExample extends React.Component {
         this.props.queryCampaigns();
     }
 
+    fakeLoadDataFromAPI(currentPage, pageSize, callback) {
+        setTimeout(() => {
+            callback({
+                data: fakeData.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+                currentPage,
+            });
+        }, 500);
+    }
+
     render() {
         const {currentPage, pageSize, recordCount} = this.state;
         const campaignItems = this.props.campaigns;
@@ -39,7 +48,7 @@ class GriddleExample extends React.Component {
             const {currentPage, pageSize} = this.state;
             console.log("next to " + currentPage);
 
-            //fakeLoadDataFromAPI(currentPage + 1, pageSize, this.updateTableState);
+            loadDataFromAPI(currentPage + 1, pageSize, this.updateTableState);
             this.updateTableState();
         }
 
@@ -47,7 +56,8 @@ class GriddleExample extends React.Component {
             const {currentPage, pageSize} = this.state;
             console.log("prev to " + currentPage);
 
-            //fakeLoadDataFromAPI(currentPage - 1, pageSize, this.updateTableState);
+            ;
+            oadDataFromAPI(currentPage - 1, pageSize, this.updateTableState);
             this.updateTableState();
         }
 
@@ -55,7 +65,7 @@ class GriddleExample extends React.Component {
             const {pageSize} = this.state;
             console.log("go to " + currentPage);
 
-            //fakeLoadDataFromAPI(pageNumber, pageSize, this.updateTableState);
+            loadDataFromAPI(pageNumber, pageSize, this.updateTableState);
             this.updateTableState();
         }
 

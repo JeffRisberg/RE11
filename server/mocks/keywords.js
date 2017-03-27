@@ -1,36 +1,33 @@
-module.exports = function (app) {
-    var express = require('express');
-    var keywordsRouter = express.Router();
+const express = require('express');
 
-    // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+const keywordsRouter = express.Router();
+
+const bodyParser = require('body-parser');
+
+module.exports = (app) => {
+    app.use(bodyParser.urlencoded({
+        extended: true,
+    }));
+
     keywordsRouter.use(bodyParser.json());
 
     var keywordDB = app.keywordDB;
 
     keywordsRouter.get('/', function (req, res) {
-        delete req.query["_"];
-        keywordDB.find(req.query).exec(function (error, keywords) {
-            res.send({
-                'status': "ok",
-                'data': keywords
-            })
-        })
-    });
+        const skip = req.query.skip;
+        const limit = req.query.limit;
+        const sort = req.query.sort ? req.query.sort : { '_id' : 1};
+        let query = keywordDB.find(req.query).sort(sort);
 
-    keywordsRouter.get('/guide', function (req, res) {
-        delete req.query["_"];
-        keywordDB.find(req.query).exec(function (error, keywords) {
-            res.send({
-                'status': "ok",
-                'data': keywords
-            })
-        })
-    });
+        if (skip) query = query.skip(skip);
+        if (limit) query = query.limit(limit);
 
-    keywordsRouter.get('/keywords/:id', function (req, res) {
-        delete req.query["_"];
-        keywordDB.find(req.query).exec(function (error, keywords) {
+        delete req.query['_'];
+        delete req.query['skip'];
+        delete req.query['limit'];
+        delete req.query['sort'];
+
+        query.exec(sort).exec(function (error, keywords) {
             res.send({
                 'status': "ok",
                 'data': keywords

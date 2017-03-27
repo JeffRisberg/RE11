@@ -1,36 +1,33 @@
-module.exports = function (app) {
-    var express = require('express');
-    var campaignsRouter = express.Router();
+const express = require('express');
 
-    // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+const campaignsRouter = express.Router();
+
+const bodyParser = require('body-parser');
+
+module.exports = (app) => {
+    app.use(bodyParser.urlencoded({
+        extended: true,
+    }));
+
     campaignsRouter.use(bodyParser.json());
 
     var campaignDB = app.campaignDB;
 
     campaignsRouter.get('/', function (req, res) {
-        delete req.query["_"];
-        campaignDB.find(req.query).exec(function (error, campaigns) {
-            res.send({
-                'status': "ok",
-                'data': campaigns
-            })
-        })
-    });
+        const skip = req.query.skip;
+        const limit = req.query.limit;
+        const sort = req.query.sort ? req.query.sort : { '_id' : 1};
+        let query = campaignDB.find(req.query).sort(sort);
 
-    campaignsRouter.get('/guide', function (req, res) {
-        delete req.query["_"];
-        campaignDB.find(req.query).exec(function (error, campaigns) {
-            res.send({
-                'status': "ok",
-                'data': campaigns
-            })
-        })
-    });
+        if (skip) query = query.skip(skip);
+        if (limit) query = query.limit(limit);
 
-    campaignsRouter.get('/campaigns/:id', function (req, res) {
-        delete req.query["_"];
-        campaignDB.find(req.query).exec(function (error, campaigns) {
+        delete req.query['_'];
+        delete req.query['skip'];
+        delete req.query['limit'];
+        delete req.query['sort'];
+
+        query.exec(function (error, campaigns) {
             res.send({
                 'status': "ok",
                 'data': campaigns

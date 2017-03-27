@@ -43,37 +43,37 @@ class FixedDataTableExample extends React.Component {
     }
 
     render() {
-        var keywordStore = this.props.keywords;
+            var keywordStore = this.props.keywords;
 
-        return (
-            <Table
-                rowHeight={28}
-                headerHeight={50}
-                rowsCount={keywordStore.getSize()}
-                onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-                isColumnResizing={false}
-                width={1000}
-                height={200}
-                {...this.props}>
-                <Column
-                    columnKey="id"
-                    header={<Cell>Id</Cell>}
-                    cell={<TextCell data={keywordStore}/>}
-                    fixed={true}
-                    width={columnWidths.id}
-                    isResizable={true}
-                />
-                <Column
-                    columnKey="text"
-                    header={<Cell>Text (constrained)</Cell>}
-                    cell={<TextCell data={keywordStore}/>}
-                    width={columnWidths.text}
-                    isResizable={true}
-                    minWidth={70}
-                    maxWidth={200}
-                />
-            </Table>
-        );
+            return (
+                <Table
+                    rowHeight={28}
+                    headerHeight={50}
+                    rowsCount={keywordStore.getSize()}
+                    onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+                    isColumnResizing={false}
+                    width={1000}
+                    height={200}
+                    {...this.props}>
+                    <Column
+                        columnKey="id"
+                        header={<Cell>Id</Cell>}
+                        cell={<TextCell data={keywordStore}/>}
+                        fixed={true}
+                        width={columnWidths.id}
+                        isResizable={true}
+                    />
+                    <Column
+                        columnKey="text"
+                        header={<Cell>Text (constrained)</Cell>}
+                        cell={<TextCell data={keywordStore}/>}
+                        width={columnWidths.text}
+                        isResizable={true}
+                        minWidth={70}
+                        maxWidth={200}
+                    />
+                </Table>
+            );
     }
 }
 
