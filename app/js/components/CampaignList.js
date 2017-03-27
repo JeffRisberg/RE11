@@ -15,10 +15,16 @@ import Campaign from './Campaign'
 class CampaignList extends React.Component {
     constructor() {
         super();
+
+        this.state = {
+            currentPage: 1,
+            pageSize: 5,
+            recordCount: 100
+        };
     }
 
     componentDidMount() {
-        this.props.queryCampaigns();
+        this.props.queryCampaigns(0, 10);
     }
 
     render() {

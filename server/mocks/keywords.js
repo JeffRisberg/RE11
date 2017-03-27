@@ -30,17 +30,20 @@ module.exports = (app) => {
         delete req.query['limit'];
         delete req.query['sort'];
 
-        let query = keywordDB.find(req.query);
+        keywordDB.count(req.query).exec(function (error, count) {
+            let query = keywordDB.find(req.query);
 
-        if (numeric.isNormalInteger(skip)) query = query.skip(parseInt(skip));
-        if (numeric.isNormalInteger(limit)) query = query.limit(parseInt(limit));
+            if (numeric.isNormalInteger(skip)) query = query.skip(parseInt(skip));
+            if (numeric.isNormalInteger(limit)) query = query.limit(parseInt(limit));
 
-        query.exec(sort).exec(function (error, keywords) {
-            res.send({
-                'status': "ok",
-                'data': keywords
+            query.sort(sort).exec(function (error, keywords) {
+                res.send({
+                    'status': "ok",
+                    'data': keywords,
+                    'count' : count
+                })
             })
-        })
+        });
     });
 
     keywordsRouter.get('/:id', function (req, res) {

@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {queryCampaigns} from "../actions/campaigns";
 
 /**
- * GriddleExample - this is displaying campaign information
+ * GriddleExample - shows a paginated list of campaigns.
  *
  * @author Jeff Risberg
  * @since August 2016
@@ -16,62 +16,64 @@ class GriddleExample extends React.Component {
 
         this.state = {
             currentPage: 1,
-            pageSize: 5,
-            recordCount: 100
+            pageSize: 6
         };
+
+        this.loadDataFromAPI = this.loadDataFromAPI.bind(this);
+        this._onNext = this._onNext.bind(this);
+        this._onPrevious = this._onPrevious.bind(this);
+        this._onGetPage = this._onGetPage.bind(this);
     }
 
     componentDidMount() {
-        this.props.queryCampaigns();
+        const {currentPage, pageSize} = this.state;
+        const skip = (currentPage - 1) * pageSize;
+        const limit = pageSize;
+
+        this.props.queryCampaigns(skip, limit);
     }
 
-    fakeLoadDataFromAPI(currentPage, pageSize, callback) {
-        setTimeout(() => {
-            callback({
-                data: fakeData.slice((currentPage - 1) * pageSize, currentPage * pageSize),
-                currentPage,
-            });
-        }, 500);
+    loadDataFromAPI(currentPage, pageSize, callback) {
+        const skip = (currentPage - 1) * pageSize;
+        const limit = pageSize;
+
+        this.props.queryCampaigns(skip, limit);
+
+        this.setState({
+            currentPage: currentPage,
+            pageSize: pageSize
+        });
+    }
+
+    _onNext() {
+        const {currentPage, pageSize} = this.state;
+
+        this.loadDataFromAPI(currentPage + 1, pageSize, null);
+    }
+
+    _onPrevious() {
+        const {currentPage, pageSize} = this.state;
+
+        this.loadDataFromAPI(currentPage - 1, pageSize, null);
+    }
+
+    _onGetPage(newPageNumber) {
+        const {pageSize} = this.state;
+
+        this.loadDataFromAPI(newPageNumber, pageSize, null);
     }
 
     render() {
-        const {currentPage, pageSize, recordCount} = this.state;
-        const campaignItems = this.props.campaigns;
+        const {currentPage, pageSize} = this.state;
 
-        var campaigns = campaignItems.idList.map(function (itemId, index) {
-            const campaign = campaignItems.records[itemId];
+        const campaignData = this.props.campaigns;
+        const campaignCount = this.props.campaigns.count;
+
+        var campaigns = campaignData.idList.map(function (itemId, index) {
+            const campaign = campaignData.records[itemId];
 
             return campaign;
         });
-
-        _onNext = () => {
-            const {currentPage, pageSize} = this.state;
-            console.log("next to " + currentPage);
-
-            loadDataFromAPI(currentPage + 1, pageSize, this.updateTableState);
-            this.updateTableState();
-        }
-
-        _onPrevious = () => {
-            const {currentPage, pageSize} = this.state;
-            console.log("prev to " + currentPage);
-
-            ;
-            oadDataFromAPI(currentPage - 1, pageSize, this.updateTableState);
-            this.updateTableState();
-        }
-
-        _onGetPage = (pageNumber) => {
-            const {pageSize} = this.state;
-            console.log("go to " + currentPage);
-
-            loadDataFromAPI(pageNumber, pageSize, this.updateTableState);
-            this.updateTableState();
-        }
-
-        updateTableState = (currentPage) => {
-            this.setState({currentPage});
-        }
 
         return (
             <div>
@@ -82,7 +84,7 @@ class GriddleExample extends React.Component {
                          pageProperties={{
                              currentPage: currentPage,
                              pageSize: pageSize,
-                             recordCount: recordCount,
+                             recordCount: campaignCount,
                          }}
                          events={{
                              onNext: this._onNext,

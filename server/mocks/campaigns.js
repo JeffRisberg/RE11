@@ -25,17 +25,20 @@ module.exports = (app) => {
         delete req.query['limit'];
         delete req.query['sort'];
 
-        let query = campaignDB.find(req.query);
+        campaignDB.count(req.query).exec(function (error, count) {
+            let query = campaignDB.find(req.query);
 
-        if (numeric.isNormalInteger(skip)) query = query.skip(parseInt(skip));
-        if (numeric.isNormalInteger(limit)) query = query.limit(parseInt(limit));
+            if (numeric.isNormalInteger(skip)) query = query.skip(parseInt(skip));
+            if (numeric.isNormalInteger(limit)) query = query.limit(parseInt(limit));
 
-        query.sort(sort).exec(function (error, campaigns) {
-            res.send({
-                'status': "ok",
-                'data': campaigns
+            query.sort(sort).exec(function (error, campaigns) {
+                res.send({
+                    'status': "ok",
+                    'data': campaigns,
+                    'count' : count
+                })
             })
-        })
+        });
     });
 
     campaignsRouter.get('/:id', function (req, res) {

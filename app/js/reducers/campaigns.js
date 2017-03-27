@@ -2,6 +2,11 @@ import {handleActions} from "redux-actions";
 import {types} from "../types";
 
 export default handleActions({
+    [types.SET_CAMPAIGN_COUNT]: (state, action) => {
+        const count = action.count;
+
+        return {idList: state.idList, records: state.records, count};
+    },
     [types.SET_CAMPAIGNS]: (state, action) => {
         const idList = [];
         const records = {};
@@ -13,6 +18,6 @@ export default handleActions({
             }
         });
 
-        return {idList, records};
+        return {idList, records, count: state.count};
     }
 }, {idList: [], records: {}});
