@@ -23,12 +23,14 @@ module.exports = (app) => {
     keywordsRouter.get('/', function (req, res) {
         const skip = req.query.skip;
         const limit = req.query.limit;
-        const sort = req.query.sort ? {[req.query.sort] : 1} : {'id' : 1};
+        const sortDir = req.query.sortDir ? parseInt(req.query.sortDir) : 1;
+        const sort = req.query.sort ? {[req.query.sort] : sortDir} : {'id' : sortDir};
 
         delete req.query['_'];
         delete req.query['skip'];
         delete req.query['limit'];
         delete req.query['sort'];
+        delete req.query['sortDir'];
 
         keywordDB.count(req.query).exec(function (error, count) {
             let query = keywordDB.find(req.query);

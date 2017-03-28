@@ -2,10 +2,15 @@ import request from "axios";
 
 import {types} from "../types";
 
-export const queryCampaigns = (skip, limit) => {
+export const queryCampaigns = (skip, limit, sort, sortDir) => {
     return function (dispatch) {
 
-        return request.get('/ws/campaigns?skip='+skip + "&limit=" + limit)
+        let url = '/ws/campaigns?skip=' + skip + '&limit=' + limit;
+
+        if (sort) url = url + '&sort=' + sort;
+        if (sortDir) url = url + '&sortDir=' +sortDir;
+
+        return request.get(url)
             .then(response => response.data)
             .then(response => {
                 dispatch({

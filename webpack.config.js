@@ -1,8 +1,8 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        javascript: "./app/js/app.js"
+        javascript: "./app/js/client.js",
     },
     output: {
         path: __dirname + "/dist",
@@ -10,8 +10,12 @@ module.exports = {
     },
     module: {
         loaders: [
-            {test: /\.js$/, exclude: /node_modules/, loader: "babel" },
-            {test: /\.jsx$/, exclude: /node_modules/, loader: "babel" }
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
+            {test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader"}
         ]
     },
     plugins: [

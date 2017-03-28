@@ -14,8 +14,8 @@ class Footer extends React.Component {
                 <div className="footer" style={{marginLeft: '+15px', marginRight: '+15px'}}>
                     <div className="row darkgrey footer-links">
                         <div className="col-md-6 text-left">
-                            <a href="https://justgive.org/#/Help">Help</a>
-                            <a href="https://justgive.org/#/ContactUs" className="margin-l">Contact Us</a>
+                            <a href="#">Help</a>
+                            <a href="#" className="margin-l">Contact Us</a>
                         </div>
                         <div className="col-md-6 text-right">
                             <a href="https://therisbergfamily.com" className="margin-r">
