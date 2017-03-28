@@ -1,0 +1,50 @@
+body {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    background: #f3f4f3;
+}
+
+/* General purpose CSS classes */
+.white {
+    background-color: white;
+}
+
+.darkgrey, .darkgrey a {
+    background-color: #44464a;
+    color: #d7d3c7;
+}
+
+a.margin-l {
+    margin-left: 9px;
+}
+
+a.margin-r {
+    margin-right: 9px;
+}
+
+/* Header links */
+.top-border {
+    border-top: 8px solid #bb0826;
+    margin-bottom: 14px;
+}
+
+.logo {
+    margin-bottom: 14px;
+}
+
+
+/* Footer formatting */
+.footer {
+    font-size: 12px;
+}
+
+div.footer-links {
+    min-height: 40px;
+    line-height: 40px;
+}
+
+div.copyright {
+    min-height: 51px;
+    line-height: 51px;
+    background-color: #000;
+    color: #d7d3c7;
+}

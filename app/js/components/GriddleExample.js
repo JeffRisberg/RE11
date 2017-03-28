@@ -4,6 +4,8 @@ import Griddle, {plugins, RowDefinition, ColumnDefinition} from "griddle-react";
 import {connect} from "react-redux";
 import {queryCampaigns} from "../actions/campaigns";
 
+import "./GriddleExample.scss";
+
 /**
  * GriddleExample - shows a paginated list of campaigns.
  *
@@ -96,7 +98,7 @@ class GriddleExample extends React.Component {
         return (
             <div>
                 <Griddle data={campaigns}
-                         styleConfig={{classNames: {Table: 'table'}}}
+                         styleConfig={{classNames: {Table: 'table', TableHeadingCell: 'campaigns__header'}}}
                          useGriddleStyles={false}
                          showFilter={true}
                          showSettings={true}
