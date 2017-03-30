@@ -93,7 +93,8 @@ class GriddleExample extends React.Component {
             return campaign;
         });
 
-        const RightColumn = ({value}) => <div style={{textAlign: 'right'}}>{value}</div>;
+        const RightHeading = ({title}) => <div style={{textAlign: 'right'}}>{title}</div>;
+        const RightCell = ({value}) => <div style={{textAlign: 'right'}}>{value}</div>;
 
         return (
             <div>
@@ -123,25 +124,25 @@ class GriddleExample extends React.Component {
                         <ColumnDefinition order="1" id="status" title="Status"/>
                         <ColumnDefinition order="2" id="startDate" title="Start Date"/>
                         <ColumnDefinition order="3" id="impressions" title="Impressions"
-                                          customHeaderComponent={RightColumn} customComponent={RightColumn}
+                                          customHeadingComponent={RightHeading} customComponent={RightCell}
                         />
                         <ColumnDefinition order="4" id="clicks" title="Clicks"
-                                          customHeaderComponent={RightColumn} customComponent={RightColumn}
+                                          customHeadingComponent={RightHeading} customComponent={RightCell}
                         />
                         <ColumnDefinition order="5" id="ctr" title="CTR"
-                                          customHeaderComponent={RightColumn} customComponent={RightColumn}
+                                          customHeadingComponent={RightHeading} customComponent={RightCell}
                         />
                         <ColumnDefinition order="6" id="cost" title="Cost"
-                                          customHeaderComponent={RightColumn} customComponent={RightColumn}
+                                          customHeadingComponent={RightHeading} customComponent={RightCell}
                         />
                         <ColumnDefinition order="7" id="cpc" title="CPC"
-                                          customHeaderComponent={RightColumn} customComponent={RightColumn}
+                                          customHeadingComponent={RightHeading} customComponent={RightCell}
                         />
                         <ColumnDefinition order="8" id="cpm" title="CPM"
-                                          customHeaderComponent={RightColumn} customComponent={RightColumn}
+                                          customHeadingComponent={RightHeading} customComponent={RightCell}
                         />
                         <ColumnDefinition order="9" id="margin" title="Margin"
-                                          customHeaderComponent={RightColumn} customComponent={RightColumn}
+                                          customHeadingComponent={RightHeading} customComponent={RightCell}
                         />
                     </RowDefinition>
                 </Griddle>
