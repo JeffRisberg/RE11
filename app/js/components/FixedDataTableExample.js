@@ -24,6 +24,36 @@ var initialColumnWidths = {
     margin: 110
 }
 
+class SortHeaderCell extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this._onSortChange = this._onSortChange.bind(this);
+    }
+
+    render() {
+        const { children, onSortChange, ...rest } = this.props;
+        return (
+            <Cell className='campaigns__header' {...rest}>
+                <a onClick={this._onSortChange}>
+                    {children}
+                </a>
+            </Cell>
+        );
+    }
+
+    _onSortChange(e) {
+        e.preventDefault();
+
+        if (this.props.onSortChange) {
+            this.props.onSortChange(this.props.columnKey);
+        }
+    }
+}
+SortHeaderCell.propTypes = {
+    onSortChange: React.PropTypes.func
+};
+
 const TextCell = ({rowIndex, data, columnKey, ...props}) => (
     <Cell {...props}>
         {data[rowIndex][columnKey]}
@@ -52,7 +82,7 @@ class FixedDataTableExample extends React.Component {
         this._onNext = this._onNext.bind(this);
         this._onPrevious = this._onPrevious.bind(this);
         this._onGetPage = this._onGetPage.bind(this);
-        this._onSort = this._onSort.bind(this);
+        this._onSortChange = this._onSortChange.bind(this);
         this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
     }
 
@@ -97,10 +127,8 @@ class FixedDataTableExample extends React.Component {
         this.loadDataFromAPI(newPageNumber, pageSize, sort, sortDir);
     }
 
-    _onSort(sortProperties) {
+    _onSortChange(newSort) {
         const {currentPage, pageSize, sort, sortDir} = this.state;
-
-        const newSort = sortProperties.id;
 
         const revDir = (sortDir == 1) ? -1 : 1;
         const newDir = (newSort === sort) ? revDir : sortDir;
@@ -131,7 +159,7 @@ class FixedDataTableExample extends React.Component {
         });
 
         const pageOptions = [];
-        for (var i = 1; i < pageCount; i++) {
+        for (var i = 1; i <= pageCount; i++) {
             pageOptions.push(<option key={i}>{i}</option>)
         }
 
@@ -144,18 +172,22 @@ class FixedDataTableExample extends React.Component {
                     onColumnResizeEndCallback={this._onColumnResizeEndCallback}
                     isColumnResizing={false}
                     width={1100}
-                    height={235}
+                    height={252}
                     {...this.props}>
                     <Column
                         columnKey="name"
-                        header={<Cell className='campaigns__header'>Name</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange}>Name</SortHeaderCell>
+                        }
                         cell={<TextCell data={campaigns}/>}
                         fixed={true}
                         width={columnWidths.name}
                     />
                     <Column
                         columnKey="status"
-                        header={<Cell className='campaigns__header'>Status</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange}>Status</SortHeaderCell>
+                        }
                         cell={<TextCell data={campaigns}/>}
                         width={columnWidths.status}
                         isResizable={true}
@@ -164,49 +196,75 @@ class FixedDataTableExample extends React.Component {
                     />
                     <Column
                         columnKey="startDate"
-                        header={<Cell className='campaigns__header'>Start Date</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange}>Start Date</SortHeaderCell>
+                        }
                         cell={<TextCell data={campaigns}/>}
                         width={columnWidths.startDate}
                         isResizable={true}
                     />
                     <Column
                         columnKey="impressions"
-                        header={<Cell className='campaigns__header' style={{textAlign: 'right'}}>Impressions</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange} style={{textAlign: 'right'}}>
+                                Impressions
+                            </SortHeaderCell>
+                        }
                         cell={<TextRightCell data={campaigns}/>}
                         width={columnWidths.impressions}
                         isResizable={true}
                     />
                     <Column
                         columnKey="ctr"
-                        header={<Cell className='campaigns__header' style={{textAlign: 'right'}}>CTR</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange} style={{textAlign: 'right'}}>
+                                CTR
+                            </SortHeaderCell>
+                        }
                         cell={<TextRightCell data={campaigns}/>}
                         width={columnWidths.ctr}
                         isResizable={true}
                     />
                     <Column
                         columnKey="cost"
-                        header={<Cell className='campaigns__header' style={{textAlign: 'right'}}>Cost</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange} style={{textAlign: 'right'}}>
+                                Cost
+                            </SortHeaderCell>
+                        }
                         cell={<TextRightCell data={campaigns}/>}
                         width={columnWidths.cost}
                         isResizable={true}
                     />
                     <Column
                         columnKey="cpc"
-                        header={<Cell className='campaigns__header' style={{textAlign: 'right'}}>CPC</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange} style={{textAlign: 'right'}}>
+                                CPC
+                            </SortHeaderCell>
+                        }
                         cell={<TextRightCell data={campaigns}/>}
                         width={columnWidths.cpc}
                         isResizable={true}
                     />
                     <Column
                         columnKey="cpm"
-                        header={<Cell className='campaigns__header' style={{textAlign: 'right'}}>CPM</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange} style={{textAlign: 'right'}}>
+                                CPM
+                            </SortHeaderCell>
+                        }
                         cell={<TextRightCell data={campaigns}/>}
                         width={columnWidths.cpm}
                         isResizable={true}
                     />
                     <Column
                         columnKey="margin"
-                        header={<Cell className='campaigns__header' style={{textAlign: 'right'}}>Margin</Cell>}
+                        header={
+                            <SortHeaderCell onSortChange={this._onSortChange} style={{textAlign: 'right'}}>
+                                Margin
+                            </SortHeaderCell>
+                        }
                         cell={<TextRightCell data={campaigns}/>}
                         width={columnWidths.margin}
                         isResizable={true}
@@ -220,7 +278,7 @@ class FixedDataTableExample extends React.Component {
                     {pageOptions}
                 </select>
                 {' '}
-                {(currentPage <= pageCount) && <a onClick={(e) => this._onNext()} className="btn btn-default">
+                {(currentPage < pageCount) && <a onClick={(e) => this._onNext()} className="btn btn-default">
                     Next
                 </a>}
             </div>

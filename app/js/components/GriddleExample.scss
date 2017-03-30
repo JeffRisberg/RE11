@@ -4,4 +4,9 @@
     background: #269abc;
     cursor: pointer;
   }
+
+  &__header a {
+    color: black;
+    text-decoration: none;
+  }
 }
