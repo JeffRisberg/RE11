@@ -7,7 +7,7 @@ export default React.createClass({
     render() {
         return (
             <div>
-                This is the home screen.
+                <h1>React Grid Examples</h1>
             </div>
         )
     }

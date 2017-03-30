@@ -8,18 +8,11 @@ import thunkMiddleware from 'redux-thunk'
 
 import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
-import CampaignList from './components/CampaignList.js';
 import FixedDataTableExample from './components/FixedDataTableExample.js';
 import GriddleExample from './components/GriddleExample.js';
 
 import campaigns from './reducers/campaigns';
 import keywords from './reducers/keywords';
-import Store from "./helpers/Store";
-
-//var initialContent = {
-//    campaigns: {idList: [], records: {}},
-//    keywords: new Store([])
-//};
 
 const reducers = combineReducers({
     campaigns,
@@ -37,8 +30,7 @@ ReactDOM.render(
         <Router history={hashHistory}>
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
-                <Route path="campaignList" component={CampaignList}/>
-                <Route path="resizeExample" component={FixedDataTableExample}/>
+                <Route path="fixedDataTableExample" component={FixedDataTableExample}/>
                 <Route path="griddleExample" component={GriddleExample}/>
             </Route>
         </Router>

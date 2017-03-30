@@ -1,10 +1,23 @@
 import {handleActions} from "redux-actions";
 import {types} from "../types";
 
-import Store from "../helpers/Store";
-
 export default handleActions({
+    [types.SET_KEYWORD_COUNT]: (state, action) => {
+        const count = action.count;
+
+        return {idList: state.idList, records: state.records, count};
+    },
     [types.SET_KEYWORDS]: (state, action) => {
-        return new Store(action.keywords);
+        const idList = [];
+        const records = {};
+
+        action.keywords.forEach(record => {
+            if (idList.length < 10) {
+                records[record.id] = record;
+                idList.push(record.id);
+            }
+        });
+
+        return {idList, records, count: state.count};
     }
-}, new Store([]));
+}, {idList: [], records: {}});
