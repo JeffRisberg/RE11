@@ -1,9 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router'
-
-import { connect } from 'react-redux';
-
-import NavLink from './NavLink'
+import React from "react";
+import {Link} from "react-router";
+import {connect} from "react-redux";
+import NavLink from "./NavLink";
 
 /**
  * Appears at top of screen
@@ -16,23 +14,22 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <div className="header row white">
-                    <div className="top-border"></div>
+                <div className="navbar navbar-inverse navbar-fixed-top" style={{marginBottom: '0px'}}>
                     <div className="container">
-                        <div className="logo col-md-4 col-xs-4">
-                            <img src="/images/logo.jpg" />
+                        <div className="navbar-inner">
+                            <NavLink to="/" className="navbar-brand" style={{padding: 0}}>
+                                <img src="/images/logo.jpg"/>
+                            </NavLink>
+
+                            <div className="navbar-collapse collapse">
+                                <ul className="nav navbar-nav">
+                                    <li><NavLink to="/fixedDataTableExample">FixedDataTableExample</NavLink></li>
+                                    <li><NavLink to="/griddleExample">GriddleExample</NavLink></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <NavLink to="/" style={{marginLeft: '10px'}}>
-                    Home
-                </NavLink>
-                <NavLink to="/fixedDataTableExample" style={{marginLeft: '10px'}}>
-                    FixedDataTableExample
-                </NavLink>
-                <NavLink to="/griddleExample" style={{marginLeft: '10px'}}>
-                    GriddleExample
-                </NavLink>
             </div>
         )
     }
