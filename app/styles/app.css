@@ -31,6 +31,9 @@ a.margin-r {
     margin-bottom: 4px;
 }
 
+nav ul li .active {
+    background-color: #FF0000 !important;
+}
 
 /* Footer formatting */
 .footer {
