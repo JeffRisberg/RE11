@@ -10,6 +10,7 @@ import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
 import FixedDataTableExample from './components/FixedDataTableExample.js';
 import GriddleExample from './components/GriddleExample.js';
+import ReactBootstrapExample from './components/ReactBootstrapExample.js';
 
 import campaigns from './reducers/campaigns';
 import keywords from './reducers/keywords';
@@ -32,6 +33,7 @@ ReactDOM.render(
                 <IndexRoute component={Home}/>
                 <Route path="fixedDataTableExample" component={FixedDataTableExample}/>
                 <Route path="griddleExample" component={GriddleExample}/>
+                <Route path="reactBootstrapExample" component={ReactBootstrapExample}/>
             </Route>
         </Router>
     </Provider>,

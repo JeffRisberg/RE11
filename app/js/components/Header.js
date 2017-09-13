@@ -24,6 +24,7 @@ class Header extends React.Component {
                             <ul className="nav navbar-nav">
                                 <li><NavLink to="/fixedDataTableExample">FixedDataTableExample</NavLink></li>
                                 <li><NavLink to="/griddleExample">GriddleExample</NavLink></li>
+                                <li><NavLink to="/reactBootstrapExample">React Bootstrap Example</NavLink></li>
                             </ul>
                         </div>
                     </div>
