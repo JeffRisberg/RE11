@@ -67,7 +67,16 @@ class Header extends React.Component {
                         </div>
                         <div className="notification">
                           <a href="#" onClick={this.handleLinkClick}>
-                            Early degenerative change in gasket #RT-345W
+                            Predicted DSO exceeds target starting on 10/04/17
+                          </a>
+                        </div>
+                        <div className="notificationFooter">
+                          <a href="#" className="notificationAction">Show Details</a>
+                          <a href="#" className="notificationAction">Dismiss</a>
+                        </div>
+                        <div className="notification">
+                          <a href="#" onClick={this.handleLinkClick}>
+                            NetSuite data sync completed
                           </a>
                         </div>
                         <div className="notificationFooter">

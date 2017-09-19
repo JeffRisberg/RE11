@@ -104,7 +104,7 @@ div.copyright {
 }
 
 .notification {
-  padding: 10px;
+  padding: 7px;
 }
 
 .notificationFooter {
@@ -115,6 +115,6 @@ div.copyright {
 
 .notificationAction {
  font-family: 'Arial';
- font-size: 9px;
+ font-size: 10px;
  padding: 0 5px 0 10px;
 }
