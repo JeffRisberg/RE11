@@ -19,7 +19,7 @@ class NotificationItem extends Component {
 
   render() {
     return (
-      <div>
+      <div key={this.props.id}>
         <div className="notification">
           <a href="#" onClick={this.handleLinkClick}>
             {this.props.description}
@@ -35,6 +35,7 @@ class NotificationItem extends Component {
 }
 
 NotificationItem.propTypes = {
+  id: PropTypes.numberValue,
   description: PropTypes.string,
 };
 
