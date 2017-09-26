@@ -1,0 +1,7 @@
+{"_id":"1","id":1,"actor":"keyword","verb":"update","target":"","description":"keyword changed"}
+{"_id":"2","id":2,"actor":"campaign","verb":"create","target":"","description":"campaign created"}
+{"_id":"3","id":3,"actor":"keyword","verb":"create","target":"","description":"keyword created"}
+{"_id":"4","id":4,"actor":"alert","verb":"create","target":"","description":"Cash minimum will not be met on 09/28/17"}
+{"_id":"5","id":5,"actor":"alert","verb":"create","target":"","description":"Major uptick in late deliverables"}
+{"_id":"6","id":6,"actor":"alert","verb":"create","target":"","description":"Predicted DSO exceeeds target on 09/21/17"}
+{"_id":"7","id":7,"actor":"alert","verb":"create","target":"","description":"NetSuite data sync completed"}

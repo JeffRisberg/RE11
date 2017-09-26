@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router'
 
 import Header from './Header'
@@ -30,7 +31,7 @@ class AppRoot extends React.Component {
     }
 }
 AppRoot.contextTypes = {
-    location: React.PropTypes.object
+    location: PropTypes.object
 };
 
 export default AppRoot;

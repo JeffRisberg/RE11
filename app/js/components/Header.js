@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import NavLink from './NavLink';
-import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
+import Notifications from './Notifications';
 
 /**
  * Appears at top of screen
@@ -39,53 +39,7 @@ class Header extends React.Component {
               </ul>
               <ul style={{ height: '50px' }} className="nav navbar-nav navbar-right">
                 <li style={{ height: '50px' }}>
-                  <Dropdown className="account-dropdown" ref="dropdown" style={{ height: '50px' }}>
-                    <DropdownTrigger
-                      style={{ float: 'right', height: '50px', textDecoration: 'none', color: '#9D9D9D' }}>
-                      <br/>
-                      Notifications
-                    </DropdownTrigger>
-                    <DropdownContent style={{ width: '440px', top: '45px', position: 'relative' }}>
-                      <div>
-                        <div className="notification">
-                          <a href="#" onClick={this.handleLinkClick}>
-                            Cash minimum will not be met on 09/22/17
-                          </a>
-                        </div>
-                          <div className="notificationFooter">
-                            <a href="#" className="notificationAction">Show Details</a>
-                            <a href="#" className="notificationAction">Dismiss</a>
-                          </div>
-                        <div className="notification">
-                          <a href="#" onClick={this.handleLinkClick}>
-                            Major uptick in late deliverables
-                          </a>
-                        </div>
-                        <div className="notificationFooter">
-                          <a href="#" className="notificationAction">Show Details</a>
-                          <a href="#" className="notificationAction">Dismiss</a>
-                        </div>
-                        <div className="notification">
-                          <a href="#" onClick={this.handleLinkClick}>
-                            Predicted DSO exceeds target starting on 10/04/17
-                          </a>
-                        </div>
-                        <div className="notificationFooter">
-                          <a href="#" className="notificationAction">Show Details</a>
-                          <a href="#" className="notificationAction">Dismiss</a>
-                        </div>
-                        <div className="notification">
-                          <a href="#" onClick={this.handleLinkClick}>
-                            NetSuite data sync completed
-                          </a>
-                        </div>
-                        <div className="notificationFooter">
-                          <a href="#" className="notificationAction">Show Details</a>
-                          <a href="#" className="notificationAction">Dismiss</a>
-                        </div>
-                      </div>
-                    </DropdownContent>
-                  </Dropdown>
+                  <Notifications />
                 </li>
               </ul>
             </div>

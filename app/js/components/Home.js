@@ -1,9 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-export default React.createClass({
+class Home extends Component {
+
     render() {
         return (
             <div>
@@ -11,4 +10,6 @@ export default React.createClass({
             </div>
         )
     }
-})
+}
+
+export default Home;
