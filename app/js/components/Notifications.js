@@ -45,13 +45,16 @@ class Notifications extends Component {
   }
 
   render() {
-    const notificationItemList = this.props.notifications.idList.map((itemId, index) => {
-      const notification = this.props.notifications.records[itemId];
+    let notificationItemList = [];
 
-      return <NotificationItem
-        id={index}
-        description={notification.description}/>
-    })
+    if (this.state.notifications != undefined) {
+      notificationItemList = this.state.notifications.map((notification, index) => {
+
+        return <NotificationItem
+          id={index}
+          description={notification.description}/>
+      })
+    }
 
     return (
       <Dropdown className="account-dropdown" ref="dropdown" style={{ height: '50px' }}>

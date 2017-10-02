@@ -35,7 +35,7 @@ class NotificationItem extends Component {
 }
 
 NotificationItem.propTypes = {
-  id: PropTypes.numberValue,
+  id: PropTypes.number,
   description: PropTypes.string,
 };
 
