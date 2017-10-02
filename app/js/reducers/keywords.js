@@ -1,23 +1,16 @@
-import {handleActions} from "redux-actions";
-import {types} from "../types";
+import { handleActions } from 'redux-actions';
+import { ActionTypes as types } from '../constants';
 
 export default handleActions({
-    [types.SET_KEYWORD_COUNT]: (state, action) => {
-        const count = action.count;
-
-        return {idList: state.idList, records: state.records, count};
-    },
-    [types.SET_KEYWORDS]: (state, action) => {
-        const idList = [];
-        const records = {};
-
-        action.keywords.forEach(record => {
-            if (idList.length < 10) {
-                records[record.id] = record;
-                idList.push(record.id);
-            }
-        });
-
-        return {idList, records, count: state.count};
-    }
-}, {idList: [], records: {}});
+  [types.FETCH_KEYWORDS]: (state) => {
+    return Object.assign({}, state, {
+      data: [],
+      isFetching: true,
+    });
+  },
+  [types.FETCH_KEYWORDS_SUCCESS]: (state, action) => {
+    return Object.assign({}, { data: action.keywords }, {
+      isFetching: false,
+    });
+  },
+}, { data: [], isFetching: false });

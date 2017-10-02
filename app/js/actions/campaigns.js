@@ -1,26 +1,27 @@
-import request from "axios";
-
-import {types} from "../types";
+import request from 'axios';
+import { types } from '../types';
 
 export const queryCampaigns = (skip, limit, sort, sortDir) => {
-    return function (dispatch) {
+  return function (dispatch) {
 
-        let url = '/ws/campaigns?skip=' + skip + '&limit=' + limit;
+    let url = '/ws/campaigns?skip=' + skip + '&limit=' + limit;
 
-        if (sort) url = url + '&sort=' + sort;
-        if (sortDir) url = url + '&sortDir=' +sortDir;
+    if (sort) url = url + '&sort=' + sort;
+    if (sortDir) url = url + '&sortDir=' + sortDir;
 
-        return request.get(url)
-            .then(response => response.data)
-            .then(response => {
-                dispatch({
-                    type: types.SET_CAMPAIGN_COUNT,
-                    count: response.count
-                });
-                dispatch({
-                    type: types.SET_CAMPAIGNS,
-                    campaigns: response.data
-                });
-            });
-    }
+    dispatch({
+      type: types.FETCH_CAMPAIGNS,
+    });
+
+    return request.get(url)
+      .then(response => response.data)
+      .then(response => {
+        dispatch({
+          type: types.FETCH_CAMPAIGNS_SUCCESS,
+          campaigns: response.data,
+          count: response.count
+        });
+      });
+  }
 };
+

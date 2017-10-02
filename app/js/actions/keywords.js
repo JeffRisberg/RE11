@@ -1,21 +1,27 @@
-import request from "axios";
+import request from 'axios';
+import { types } from '../types';
 
-import {types} from "../types";
+export const queryKeywords = (skip, limit, sort, sortDir) => {
+  return function (dispatch) {
 
-export const queryKeywords = () => {
-    return function (dispatch, getState) {
+    let url = '/ws/keywords?skip=' + skip + '&limit=' + limit;
 
-        return request.get('/ws/keywords')
-            .then(response => response.data)
-            .then(response => {
-                dispatch({
-                    type: types.SET_KEYWORD_COUNT,
-                    keywords: response.count
-                });
-                dispatch({
-                    type: types.SET_KEYWORDS,
-                    keywords: response.data
-                });
-            });
-    }
+    if (sort) url = url + '&sort=' + sort;
+    if (sortDir) url = url + '&sortDir=' + sortDir;
+
+    dispatch({
+      type: types.FETCH_KEYWORDS,
+    });
+
+    return request.get(url)
+      .then(response => response.data)
+      .then(response => {
+        dispatch({
+          type: types.FETCH_KEYWORDS_SUCCESS,
+          keywords: response.data,
+          count: response.count
+        });
+      });
+  }
 };
+

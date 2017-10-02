@@ -1,20 +1,27 @@
 import request from 'axios';
 import { types } from '../types';
 
-export const queryNotifications = () => {
-  return function (dispatch, getState) {
+export const queryNotifications = (skip, limit, sort, sortDir) => {
+  return function (dispatch) {
 
-    return request.get('/ws/notifications')
+    let url = '/ws/notifications?skip=' + skip + '&limit=' + limit;
+
+    if (sort) url = url + '&sort=' + sort;
+    if (sortDir) url = url + '&sortDir=' + sortDir;
+
+    dispatch({
+      type: types.FETCH_NOTIFICATIONS,
+    });
+
+    return request.get(url)
       .then(response => response.data)
       .then(response => {
         dispatch({
-          type: types.SET_NOTIFICATION_COUNT,
-          notifications: response.count
-        });
-        dispatch({
-          type: types.SET_NOTIFICATIONS,
-          notifications: response.data
+          type: types.FETCH_NOTIFICATIONS_SUCCESS,
+          notifications: response.data,
+          count: response.count
         });
       });
   }
 };
+

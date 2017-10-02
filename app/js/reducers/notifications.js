@@ -1,23 +1,16 @@
-import {handleActions} from "redux-actions";
-import {types} from "../types";
+import { handleActions } from 'redux-actions';
+import { ActionTypes as types } from '../constants';
 
 export default handleActions({
-    [types.SET_NOTIFICATION_COUNT]: (state, action) => {
-        const count = action.count;
-
-        return {idList: state.idList, records: state.records, count};
-    },
-    [types.SET_NOTIFICATIONS]: (state, action) => {
-        const idList = [];
-        const records = {};
-
-        action.notifications.forEach(record => {
-            if (idList.length < 10) {
-                records[record.id] = record;
-                idList.push(record.id);
-            }
-        });
-
-        return {idList, records, count: state.count};
-    }
-}, {idList: [], records: {}});
+  [types.FETCH_NOTIFICATIONS]: (state) => {
+    return Object.assign({}, state, {
+      data: [],
+      isFetching: true,
+    });
+  },
+  [types.FETCH_NOTIFICATIONS_SUCCESS]: (state, action) => {
+    return Object.assign({}, { data: action.notifications }, {
+      isFetching: false,
+    });
+  },
+}, { data: [], isFetching: false });
