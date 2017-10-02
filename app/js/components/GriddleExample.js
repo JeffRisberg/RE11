@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Loading } from 'components';
+import { Loading } from './Loading';
 import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
 import { connect } from 'react-redux';
 import { queryCampaigns } from '../actions/campaigns';

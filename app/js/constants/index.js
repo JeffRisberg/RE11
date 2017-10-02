@@ -1,5 +1,4 @@
-export const types = {
-
+export const ActionTypes = {
   FETCH_KEYWORDS: 'FETCH_KEYWORDS',
   FETCH_KEYWORDS_SUCCESS: 'FETCH_KEYWORDS_SUCCESS',
 

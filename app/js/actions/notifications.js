@@ -1,5 +1,5 @@
 import request from 'axios';
-import { types } from '../types';
+import { ActionTypes as types, forms } from '../constants';
 
 export const queryNotifications = (skip, limit, sort, sortDir) => {
   return function (dispatch) {
