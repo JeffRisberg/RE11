@@ -21,9 +21,9 @@ class NotificationItem extends Component {
     return (
       <div key={this.props.id}>
         <div className="notification">
-          <a href="#" onClick={this.handleLinkClick}>
+          <span onClick={this.handleLinkClick}>
             {this.props.description}
-          </a>
+          </span>
         </div>
         <div className="notificationFooter">
           <a href="#" className="notificationAction">Show Details</a>
